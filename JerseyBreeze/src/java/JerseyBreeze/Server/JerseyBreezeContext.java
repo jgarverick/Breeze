@@ -4,9 +4,12 @@
  */
 package JerseyBreeze.Server;
 
+import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -50,5 +53,24 @@ public class JerseyBreezeContext {
      */
     public static Map<String,Object> generateMetadata() throws Exception{
         return metaGenerator.BuildMetadata();
+    }
+    
+    public static Object saveChanges(ArrayList<Object> contents) throws Exception{
+        SessionFactory factory = JerseyBreezeContext.getSessionFactory();
+        Session openSession = factory.openSession();
+        Transaction tx = null;
+        for (Object o : contents) {
+            try {
+                tx = openSession.beginTransaction();
+                openSession.merge(o);
+                //openSession.flush();
+            } catch (Exception e) {
+                tx.rollback();
+                throw e;
+            }
+        }
+        openSession.flush();
+        openSession.close();
+        return null;
     }
 }

@@ -5,6 +5,8 @@
 package JerseyBreeze.Server;
 
 import JerseyBreeze.Entities.Customer;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -23,6 +25,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 /**
@@ -41,7 +44,7 @@ public class ContextResource {
      */
     public ContextResource() {
     }
-   
+
     /**
      *
      * @return
@@ -49,16 +52,16 @@ public class ContextResource {
     @GET
     @Path("Metadata")
     @Produces("application/json")
-    public Map<String,Object> getMetadata(){
+    public Map<String, Object> getMetadata() {
         try {
             return JerseyBreezeContext.generateMetadata();
         } catch (Exception ex) {
             Logger.getLogger(ContextResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
-    
+
     /**
      *
      * @return
@@ -66,26 +69,24 @@ public class ContextResource {
     @GET
     @Path("Customers")
     @Produces("application/json")
-    public List<Customer> getCustomers(){
+    public List<Customer> getCustomers() {
         SessionFactory factory = JerseyBreezeContext.getSessionFactory();
         Session openSession = factory.openSession();
         List<Customer> results = openSession.createQuery("FROM Customer").list();
         openSession.close();
         return results;
-        
+
     }
-    
+
     /**
      *
      * @param content
      */
     @POST
     @Path("SaveChanges")
-    @Consumes({ "application/json" })
-    public void saveChanges(JerseyBreezeSaveRequest content) {
-        SessionFactory factory = JerseyBreezeContext.getSessionFactory();
-        Session openSession = factory.openSession();
-
-        openSession.close();
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    public Object saveChanges(ArrayList<Object> content) throws Exception {
+        return JerseyBreezeContext.saveChanges(content);
     }
 }

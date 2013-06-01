@@ -48,7 +48,7 @@
             };
             $(document).ready(function() {
                 ko.applyBindings(vm);
-                vm.Manager.setProperties({validationOptions: vo});
+                //vm.Manager.setProperties({validationOptions: vo});
                 vm.Manager.saveOptions.allowConcurrentSaves = true;
             });
         </script>

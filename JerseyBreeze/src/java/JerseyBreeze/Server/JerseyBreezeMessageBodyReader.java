@@ -22,7 +22,9 @@ import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
 import org.codehaus.jackson.map.ObjectMapper;
 import JerseyBreeze.Entities.*;
+import java.util.ArrayList;
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.DeserializationConfig;
 /**
  *
  * @author jgarverick
@@ -37,28 +39,26 @@ public class JerseyBreezeMessageBodyReader implements MessageBodyReader {
 
     public Object readFrom(Class type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             JsonNode readTree = mapper.readTree(entityStream);
+            ArrayList<Object> list = new ArrayList<Object>();
             for(JsonNode node: readTree){
-                String name = node.asToken().name();
-                Logger.getLogger(this.getClass().getName()).log(Level.INFO, null, name);
-            }
-        JerseyBreezeSaveRequest output = mapper.readValue(entityStream, JerseyBreezeSaveRequest.class);
-        if(output.getEntities().size()>0){
-            for (Iterator<LinkedHashMap> it = output.getEntities().iterator(); it.hasNext();) {
-                LinkedHashMap entity = it.next();
-                LinkedHashMap aspect = (LinkedHashMap)entity.get("entityAspect");
-                String entry = aspect.values().toArray()[0].toString();
+                for(Iterator<JsonNode> it = node.iterator();it.hasNext();){
+                    JsonNode child = it.next();
+                    JsonNode entity = child.get("entityAspect");
+                    String entry = entity.get("entityTypeName").asText();
                 String[] split = entry.split(":#");
                 String newEntry = split[1] + "." + split[0];
                 Class<?> loadClass = Class.forName(newEntry);
-                //Class<?> clValue = Class.forName(entry);
-                Object newObj = mapper.readValue(entity.toString(), loadClass);
-                return newObj;
+                    Object newObj = mapper.readValue(child, loadClass);
+                list.add(newObj);
+                }
             }
+          return list;      
         }
-        return output;
-        } catch(Exception e){
+
+         catch(Exception e){
             try {
                 throw e;
             } catch (Exception ex) {
