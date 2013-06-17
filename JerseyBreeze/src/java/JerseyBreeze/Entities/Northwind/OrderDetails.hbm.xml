@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 16, 2013 10:02:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="JerseyBreeze.Entities.Northwind.OrderDetails" table="`Order Details`" schema="dbo" catalog="NorthwindIB">
+        <composite-id name="id" class="JerseyBreeze.Entities.Northwind.OrderDetailsId">
+            <key-property name="orderId" type="int">
+                <column name="OrderID" />
+            </key-property>
+            <key-property name="productId" type="int">
+                <column name="ProductID" />
+            </key-property>
+        </composite-id>
+        <property name="unitPrice" type="big_decimal">
+            <column name="UnitPrice" scale="4" not-null="true" />
+        </property>
+        <property name="quantity" type="short">
+            <column name="Quantity" not-null="true" />
+        </property>
+        <property name="discount" type="float">
+            <column name="Discount" precision="24" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

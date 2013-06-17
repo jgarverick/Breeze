@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 16, 2013 10:02:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="JerseyBreeze.Entities.Northwind.Territories" table="Territories" schema="dbo" catalog="NorthwindIB">
+        <id name="territoryId" type="string">
+            <column name="TerritoryID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="region" class="JerseyBreeze.Entities.Northwind.Region" fetch="select">
+            <column name="RegionID" not-null="true" />
+        </many-to-one>
+        <property name="territoryDescription" type="string">
+            <column name="TerritoryDescription" not-null="true" />
+        </property>
+        <set name="employeeses" inverse="true" table="EmployeeTerritories">
+            <key>
+                <column name="TerritoryID" not-null="true" />
+            </key>
+            <many-to-many entity-name="JerseyBreeze.Entities.Northwind.Employees">
+                <column name="EmployeeID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

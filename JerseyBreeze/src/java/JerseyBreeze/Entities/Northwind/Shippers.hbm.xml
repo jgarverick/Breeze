@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 16, 2013 10:02:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="JerseyBreeze.Entities.Northwind.Shippers" table="Shippers" schema="dbo" catalog="NorthwindIB">
+        <id name="shipperId" type="int">
+            <column name="ShipperID" />
+            <generator class="assigned" />
+        </id>
+        <property name="companyName" type="string">
+            <column name="CompanyName" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="Phone" />
+        </property>
+        <set name="orderses" inverse="true">
+            <key>
+                <column name="ShipVia" />
+            </key>
+            <one-to-many class="JerseyBreeze.Entities.Northwind.Orders" />
+        </set>
+    </class>
+</hibernate-mapping>

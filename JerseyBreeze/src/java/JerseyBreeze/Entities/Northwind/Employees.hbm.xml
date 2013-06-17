@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 16, 2013 10:02:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="JerseyBreeze.Entities.Northwind.Employees" table="Employees" schema="dbo" catalog="NorthwindIB">
+        <id name="employeeId" type="int">
+            <column name="EmployeeID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="employees" class="JerseyBreeze.Entities.Northwind.Employees" fetch="select">
+            <column name="ReportsTo" />
+        </many-to-one>
+        <property name="lastName" type="string">
+            <column name="LastName" not-null="true" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="FirstName" not-null="true" />
+        </property>
+        <property name="title" type="string">
+            <column name="Title" />
+        </property>
+        <property name="titleOfCourtesy" type="string">
+            <column name="TitleOfCourtesy" />
+        </property>
+        <property name="birthDate" type="timestamp">
+            <column name="BirthDate" length="23" />
+        </property>
+        <property name="hireDate" type="timestamp">
+            <column name="HireDate" length="23" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" />
+        </property>
+        <property name="city" type="string">
+            <column name="City" />
+        </property>
+        <property name="region" type="string">
+            <column name="Region" />
+        </property>
+        <property name="postalCode" type="string">
+            <column name="PostalCode" />
+        </property>
+        <property name="country" type="string">
+            <column name="Country" />
+        </property>
+        <property name="homePhone" type="string">
+            <column name="HomePhone" />
+        </property>
+        <property name="extension" type="string">
+            <column name="Extension" />
+        </property>
+        <property name="photo" type="binary">
+            <column name="Photo" />
+        </property>
+        <property name="notes" type="string">
+            <column name="Notes" />
+        </property>
+        <property name="photoPath" type="string">
+            <column name="PhotoPath" />
+        </property>
+        <set name="territorieses" inverse="false" table="EmployeeTerritories">
+            <key>
+                <column name="EmployeeID" not-null="true" />
+            </key>
+            <many-to-many entity-name="JerseyBreeze.Entities.Northwind.Territories">
+                <column name="TerritoryID" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="orderses" inverse="true">
+            <key>
+                <column name="EmployeeID" />
+            </key>
+            <one-to-many class="JerseyBreeze.Entities.Northwind.Orders" />
+        </set>
+        <set name="employeeses" inverse="true">
+            <key>
+                <column name="ReportsTo" />
+            </key>
+            <one-to-many class="JerseyBreeze.Entities.Northwind.Employees" />
+        </set>
+    </class>
+</hibernate-mapping>

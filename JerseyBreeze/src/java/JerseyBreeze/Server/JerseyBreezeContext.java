@@ -6,10 +6,10 @@ package JerseyBreeze.Server;
 
 import java.util.ArrayList;
 import java.util.Map;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.classic.Session;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.Session;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -26,8 +26,8 @@ public class JerseyBreezeContext {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            AnnotationConfiguration config = new AnnotationConfiguration();
-            sessionFactory = config.configure().buildSessionFactory();
+            Configuration config = new Configuration().configure("northwindIB.cfg.xml");
+            sessionFactory = config.buildSessionFactory();
             
             // Initialize the metadata provider
             metaGenerator = new HBreezeMetadata(sessionFactory, config);

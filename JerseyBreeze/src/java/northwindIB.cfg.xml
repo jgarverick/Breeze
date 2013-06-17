@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="hibernate.connection.url">jdbc:sqlserver://localhost\SQLEXPRESS;databaseName=NorthwindIB</property>
+    <property name="hibernate.connection.username">testuser</property>
+    <property name="hibernate.connection.password">testuser</property>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Territories.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/CustomerDemographics.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Employees.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/OrderDetails.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Customers.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Shippers.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Region.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Categories.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Products.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Orders.hbm.xml"/>
+    <mapping resource="JerseyBreeze/Entities/Northwind/Suppliers.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

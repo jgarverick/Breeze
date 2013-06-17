@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 16, 2013 10:02:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="JerseyBreeze.Entities.Northwind.Orders" table="Orders" schema="dbo" catalog="NorthwindIB">
+        <id name="orderId" type="int">
+            <column name="OrderID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="employees" class="JerseyBreeze.Entities.Northwind.Employees" fetch="select">
+            <column name="EmployeeID" />
+        </many-to-one>
+        <many-to-one name="customers" class="JerseyBreeze.Entities.Northwind.Customers" fetch="select">
+            <column name="CustomerID" />
+        </many-to-one>
+        <many-to-one name="shippers" class="JerseyBreeze.Entities.Northwind.Shippers" fetch="select">
+            <column name="ShipVia" />
+        </many-to-one>
+        <property name="orderDate" type="timestamp">
+            <column name="OrderDate" length="23" />
+        </property>
+        <property name="requiredDate" type="timestamp">
+            <column name="RequiredDate" length="23" />
+        </property>
+        <property name="shippedDate" type="timestamp">
+            <column name="ShippedDate" length="23" />
+        </property>
+        <property name="freight" type="big_decimal">
+            <column name="Freight" scale="4" />
+        </property>
+        <property name="shipName" type="string">
+            <column name="ShipName" />
+        </property>
+        <property name="shipAddress" type="string">
+            <column name="ShipAddress" />
+        </property>
+        <property name="shipCity" type="string">
+            <column name="ShipCity" />
+        </property>
+        <property name="shipRegion" type="string">
+            <column name="ShipRegion" />
+        </property>
+        <property name="shipPostalCode" type="string">
+            <column name="ShipPostalCode" />
+        </property>
+        <property name="shipCountry" type="string">
+            <column name="ShipCountry" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 16, 2013 10:02:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="JerseyBreeze.Entities.Northwind.CustomerDemographics" table="CustomerDemographics" schema="dbo" catalog="NorthwindIB">
+        <id name="customerTypeId" type="string">
+            <column name="CustomerTypeID" />
+            <generator class="assigned" />
+        </id>
+        <property name="customerDesc" type="string">
+            <column name="CustomerDesc" />
+        </property>
+        <set name="customerses" inverse="true" table="CustomerCustomerDemo">
+            <key>
+                <column name="CustomerTypeID" not-null="true" />
+            </key>
+            <many-to-many entity-name="JerseyBreeze.Entities.Northwind.Customers">
+                <column name="CustomerID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

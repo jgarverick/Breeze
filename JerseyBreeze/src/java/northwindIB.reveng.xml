@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+      <schema-selection match-catalog="NorthwindIB" match-schema="dbo"/>
+<type-mapping>
+	<sql-type jdbc-type="INTEGER" hibernate-type="int"
+	>
+	</sql-type>
+	<sql-type jdbc-type="NVARCHAR" hibernate-type="string">
+	</sql-type>
+	<sql-type jdbc-type="TIMESTAMP" hibernate-type="timestamp"
+		length="23">
+	</sql-type>
+	<sql-type jdbc-type="LONGVARBINARY" hibernate-type="binary"
+		>
+	</sql-type>
+	<sql-type jdbc-type="LONGNVARCHAR" hibernate-type="string">
+	</sql-type>
+	<sql-type jdbc-type="NCHAR" hibernate-type="string"></sql-type>
+	<sql-type jdbc-type="VARCHAR" hibernate-type="string">
+	</sql-type>
+</type-mapping>
+
+  <table-filter match-name="Suppliers"/>
+  <table-filter match-name="CustomerCustomerDemo"/>
+  <table-filter match-name="Region"/>
+  <table-filter match-name="Shippers"/>
+  <table-filter match-name="EmployeeTerritories"/>
+  <table-filter match-name="Order Details"/>
+  <table-filter match-name="Territories"/>
+  <table-filter match-name="Customers"/>
+  <table-filter match-name="Employees"/>
+  <table-filter match-name="Categories"/>
+  <table-filter match-name="Products"/>
+  <table-filter match-name="CustomerDemographics"/>
+  <table-filter match-name="Orders"/>
+</hibernate-reverse-engineering>

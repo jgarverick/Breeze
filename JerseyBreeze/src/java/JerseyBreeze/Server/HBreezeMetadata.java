@@ -398,7 +398,7 @@ import org.hibernate.type.Type;
             nmap.put("nameOnServer", propName);
 
             Class<?> relatedEntityType = GetEntityType(propType.getReturnedClass(), propType.isCollectionType());
-            nmap.put("entityTypeName", relatedEntityType.getName() + ":#" + relatedEntityType.getPackage().getName());
+            nmap.put("entityTypeName", relatedEntityType.getSimpleName() + ":#" + relatedEntityType.getPackage().getName());
             nmap.put("isScalar", !propType.isCollectionType());
 
             // the associationName must be the same at both ends of the association.
@@ -514,9 +514,9 @@ import org.hibernate.type.Type;
         String GetAssociationName(String name1, String name2, boolean isOneToOne)
         {
             if (name1.compareTo(name2) < 0)
-                return ASSN + name1 + '_' + name2 + (isOneToOne ? ONE2ONE : null);
+                return ASSN + name1 + '_' + name2 + (isOneToOne ? ONE2ONE : "");
             else
-                return ASSN + name2 + '_' + name1 + (isOneToOne ? ONE2ONE : null);
+                return ASSN + name2 + '_' + name1 + (isOneToOne ? ONE2ONE : "");
         }
 
 
@@ -527,7 +527,8 @@ import org.hibernate.type.Type;
                     put("Date", "date");
                     put("decimal", "number" );
                     put("Guid", "guid" );
-                    put("integer", "int32" );
+                    put("integer", "integer" );
+                    put("int", "integer" );
                     put("big_integer", "integer");
                     put("big_decimal", "number" );
                     put("Time", "duration" );
